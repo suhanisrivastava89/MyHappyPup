@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Nearby Doctors</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .doctor-card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Find Nearby Doctors</h1>
+    <label for="location">Enter your location:</label>
+    <input type="text" id="location" placeholder="Enter your location">
+    <button onclick="searchDoctors()">Search</button>
+    <div id="map"></div>
+
+    <div id="doctors-list">
+        <!-- Doctors' information will be dynamically added here -->
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDN0P97dCD6HEK1t86GHdbmiS1wQoh6bk0&libraries=places&callback=initMap" async defer></script>
+    <script>
+        var map;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: -34.397, lng: 150.644 }, // Default to Sydney, Australia
+                zoom: 10
+            });
+        }
+
+        function searchDoctors() {
+            var location = document.getElementById('location').value;
+            if (location.trim() === "") {
+                alert("Please enter a valid location.");
+                return;
+            }
+
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ address: location }, function(results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    var userLocation = {
+                        lat: results[0].geometry.location.lat(),
+                        lng: results[0].geometry.location.lng()
+                    };
+
+                    map.setCenter(userLocation);
+
+                    // Search for nearby doctors
+                    var request = {
+                        location: userLocation,
+                        radius: '5000', // Search radius in meters (adjust as needed)
+                        type: ['doctor', 'health', 'physiotherapist'] // Adjust types as needed
+                    };
+
+                    var service = new google.maps.places.PlacesService(map);
+                    service.nearbySearch(request, function(results, status) {
+                        if (status === google.maps.places.PlacesServiceStatus.OK) {
+                            document.getElementById('doctors-list').innerHTML = ''; // Clear previous results
+                            for (var i = 0; i < results.length; i++) {
+                                createMarker(results[i]);
+                                addDoctorCard(results[i]);
+                            }
+                        } else {
+                            alert('No doctors found nearby.');
+                        }
+                    });
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+
+        function createMarker(place) {
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location
+            });
+
+            var infowindow = new google.maps.InfoWindow({
+                content: place.name
+            });
+
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+            });
+        }
+
+        function addDoctorCard(place) {
+            var doctorsList = document.getElementById('doctors-list');
+            var card = document.createElement('div');
+            card.className = 'doctor-card';
+
+            var content = '<strong>' + place.name + '</strong><br>' +
+                          'Phone: ' + (place.formatted_phone_number ? place.formatted_phone_number : 'N/A') + '<br>' +
+                          'Address: ' + (place.vicinity ? place.vicinity : 'N/A');
+
+            card.innerHTML = content;
+            doctorsList.appendChild(card);
+        }
+    </script>
+</body>
+</html>

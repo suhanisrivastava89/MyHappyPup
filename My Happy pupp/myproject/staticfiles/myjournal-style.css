@@ -1,0 +1,24 @@
+.journal-record {
+    display: flex;
+    margin: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 50vw;
+  }
+  
+  .journal-record img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover; /* Scales image to fit container */
+    margin-right: 20px;
+  }
+  
+  .text-section {
+    flex: 1; /* Makes text section fill remaining space */
+    padding: 15px;
+  }
+  
+  .text-section h2 {
+    margin-bottom: 10px;
+  }
+  

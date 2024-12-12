@@ -1,0 +1,109 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Mood Tracker</title>
+    <link rel="stylesheet" href="{% static 'journalstyle.css' %}">
+</head>
+<body>
+    <div id="mood-tracker" class="container">
+        <h1>My Daily Journal</h1>
+        <form method="POST" enctype="multipart/form-data" action="{% url 'save_mood' %}">
+            {% csrf_token %}
+            <div id="mood-selector">
+                <div>
+                    <h2>How are you feeling today?</h2>
+                </div>
+                <br>
+                <div>
+                    <div class="mood-option happy" data-mood="happy"><span style="font-size: 0.8em;">&#128512;</span> <p>Happy</p></div>
+                    <div class="mood-option calm" data-mood="calm">&#128523; <p>Calm</p></div>
+                    <div class="mood-option neutral" data-mood="neutral">&#128528; <p>Neutral</p></div>
+                    <div class="mood-option sad" data-mood="sad">&#128532; <P>Sad</P></div>
+                    <div class="mood-option angry" data-mood="angry">&#128545; <p>Angry</p></div>
+                </div>
+            </div>
+            <div id="weather-selector">
+                <div>
+                    <h2>How's the weather today?</h2>
+                </div>
+                <br>
+                <div>
+                    <div class="weather-option sunny" data-weather="sunny">&#9728; <p>Sunny</p></div>
+                    <div class="weather-option cloudy" data-weather="cloudy">&#9729; <p>Cloudy</p></div>
+                    <div class="weather-option rainy" data-weather="rainy">&#9730; <p>Rainy</p></div>
+                    <div class="weather-option snowy" data-weather="snowy">&#10052;<p>Snowy</p></div>
+                    <div class="weather-option stormy" data-weather="stormy">&#9889;<p>Stormy</p></div>
+                </div>
+            </div>
+
+            <div id="people-selector">
+                <div>
+                    <h2>Who are you with?</h2>
+                </div>
+                <br>
+                <div>
+                    <div class="people-option friends" data-people="friends">👫 <p>Friends</p></div>
+                    <div class="people-option family" data-people="family">👪 <p>Family</p></div>
+                    <div class="people-option partner" data-people="partner">❤️ <p>Partner</p></div>
+                    <div class="people-option others" data-people="others">👥 <p>Others</p></div>
+                    <div class="people-option none" data-people="none">🚶‍♂️ <p>None</p></div>
+                </div>
+            </div>
+
+            <div id="emotions-selector">
+                <div>
+                    <h2>What emotions are you experiencing?</h2>
+                </div>
+                <br>
+                <div>
+                    <div class="emotion-option joy" data-emotion="joy">&#128513; <p>Joy</p></div>
+                    <div class="emotion-option love" data-emotion="love">&#128525; <p>Love</p></div>
+                    <div class="emotion-option laughter" data-emotion="laughter">&#128514; <p>Laughter</p></div>
+                    <div class="emotion-option surprise" data-emotion="surprise">&#128558; <p>Surprise</p></div>
+                    <div class="emotion-option sadness" data-emotion="sadness">&#128546; <p>Sadness</p></div>
+                    <div class="emotion-option anger" data-emotion="anger">&#128544; <p>Anger</p></div>
+                    <div class="emotion-option fear" data-emotion="fear">&#128561; <p>Fear</p></div>
+                    <div class="emotion-option disgust" data-emotion="disgust">&#128534; <p>Disgust</p></div>
+                    <div class="emotion-option relief" data-emotion="relief">&#128516; <p>Relief</p></div>
+                    <div class="emotion-option contentment" data-emotion="contentment">&#128578; <p>Contentment</p></div>
+                    <div class="emotion-option gratitude" data-emotion="gratitude">&#129392; <p>Gratitude</p></div>
+                    <div class="emotion-option admiration" data-emotion="admiration">&#128525; <p>Admiration</p></div>
+                    <div class="emotion-option pride" data-emotion="pride">&#128516; <p>Pride</p></div>
+                    <div class="emotion-option guilt" data-emotion="guilt">&#128553; <p>Guilt</p></div>
+                    <div class="emotion-option shame" data-emotion="shame">&#128550; <p>Shame</p></div>
+                </div>
+            </div>
+            
+            <!-- For Image Upload -->
+            <div id="image-upload">
+                <h2>Upload Picture</h2>
+                <input type="file" accept="image/*" id="file-input" name="image">
+                <button id="camera-button">Capture from Camera</button>
+                <div id="uploaded-image-container">
+                    <img id="uploaded-image" alt="Uploaded Image"><br>
+                    <button id="delete-button">Delete</button>
+                </div>
+                <br>
+            </div>
+
+            <!-- Hidden input fields -->
+            <input type="hidden" name="mood" id="mood-input">
+            <input type="hidden" name="weather" id="weather-input">
+            <input type="hidden" name="people" id="people-input">
+            <input type="hidden" name="emotions" id="emotions-input">
+            <textarea id="notes" name="notes" placeholder="Optional: Add a short note about your day..."></textarea>
+            <button id="save-button" type="submit">Save Mood</button>
+        </form>
+        <div id="mood-history">
+            <h2>Mood History (Today)</h2>
+            <ul id="mood-list"></ul>
+        </div>
+    </div>
+
+    <script src="{% static 'journalscript.js' %}"></script>
+</body>
+</html>

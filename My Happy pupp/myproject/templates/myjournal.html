@@ -1,0 +1,250 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>My Journal</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <style>
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        backdrop-filter: blur(20px);
+        box-shadow: rgb(129, 129, 129) 0 0 20px 0;
+      }
+      section{
+        display: flex;
+
+      }
+      #charts{
+        width: 40%;
+      }
+      #journal h1{
+        font-size: 3rem;
+        padding: 20px 0;
+        text-align: center;
+      }
+      #journal{
+        width: 40%;
+        justify-content: flex-start;
+      }
+      .navbar .container {
+        display: flex;
+        justify-content: space-between;
+      }
+      .navbar-collapse {
+        width: 100px;
+        justify-content: center;
+      }
+
+      .card {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-header {
+        background-color: #f0f0f0;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .card-body {
+        padding: 10px;
+      }
+
+      .card-body img {
+        max-width: 100%;
+        height: 300px;
+        width: 300px;
+        object-fit: cover;
+        border-radius: 20px;
+      }
+
+      .delete-button {
+        background-color: hsl(0, 100%, 81%);
+        color: #ff0000;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        border: 1px solid black;
+      }
+      #charts{
+        margin-top: 100px;
+        border: 1px solid black;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        height: 450px;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg sticky-top Navbar">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img
+            src="{% static 'logo.png' %}"
+            alt="Logo"
+            width="30"
+            height="30"
+            class="d-inline-block align-text-top"
+          />
+          My Happy Pup
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#about-us-page"
+                >About Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="myjournal"
+                >My Journal</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="help1"
+                >Need Help?</a
+              >
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="logout">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="signup">Login/Signup</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section>
+    <div id="journal" class="container">
+      <h1>My Journal Record</h1>
+      {% if mood_entries %} {% for mood_entry in mood_entries %}
+      <div class="card">
+        <div class="card-header">
+          <h3>{{ mood_entry.created_at }}</h3>
+        </div>
+        <div class="card-body">
+          <p>Mood: {{ mood_entry.mood }}</p>
+          <!-- Other mood entry fields -->
+          {% if mood_entry.image %}
+          <img
+            src="{{ mood_entry.image.url }}"
+            alt="Image"
+            style="max-width: 100%"
+          />
+          {% endif %}
+        </div>
+        <div class="card-footer">
+          <form
+            id="delete-form-{{ mood_entry.id }}"
+            action="{% url 'delete_mood_entry' mood_entry.id %}"
+            method="POST"
+          >
+            {% csrf_token %}
+            <button
+              type="button"
+              class="delete-button"
+              onclick="confirmDelete('{{ mood_entry.id }}')"
+            >
+              Delete
+            </button>
+          </form>
+        </div>
+      </div>
+      {% endfor %} {% else %}
+      <p>No mood entries found.</p>
+      {% endif %}
+    </div>
+
+    <!-- chartss -->
+
+    <div class="contaier" id="charts"> charts
+      <div>
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+
+
+  </section>
+
+    <script>
+      function confirmDelete(id) {
+        if (confirm("Are you sure you want to delete this entry?")) {
+          document.getElementById("delete-form-" + id).submit();
+        }
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Chart JS script -->
+
+    <script>
+      const ctx = document.getElementById('myChart');
+    
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday'],
+          datasets: [{
+            label: 'Mood analysis',
+            data: [12, 19, 3, 5, 2, 3,9],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
+
+    <script src="{% static 'journalscript.js' %}"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.botpress.cloud/webchat/v2/inject.js"></script>
+    <script src="https://mediafiles.botpress.cloud/ff0fb46a-ab18-4865-af5e-79f8f318437e/webchat/v2/config.js"></script>
+  </body>
+</html>

@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Inria+Sans:ital@0;1&family=Kaushan+Script&family=Quicksand&family=Varela+Round&family=Vina+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Inria+Sans:ital@0;1&family=Kaushan+Script&family=Quicksand&family=Varela+Round&family=Vina+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Inria+Sans:ital@0;1&family=Kaushan+Script&family=Quicksand&family=Varela+Round&family=Vina+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Roboto+Condensed:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Itim&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Luckiest+Guy&family=Manrope:wght@200..800&family=Neucha&family=Pangolin&family=Poetsen+One&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Fredoka";
+}
+#homepage{
+    background-image: url(background.png);
+    background-size: cover;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    backdrop-filter: blur(20px);
+    box-shadow: rgb(129, 129, 129) 0 0 20px 0;
+}
+.navbar .container{
+    display: flex;
+    justify-content: space-between;
+}
+.navbar-collapse{
+    width: 100px;
+    justify-content: center;
+}
+.hero-section{
+    height: 75vh;
+    background-size: cover;
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+}
+.hero-left{
+    
+    z-index: 2;
+    
+    margin: 5rem 0;
+   
+    
+}
+.hero-left h1{
+    font-family: "Luckiest Guy";
+    
+    font-size: 5rem;
+    font-weight: 900;
+    color: #508a87;
+    margin-top: 10vh;
+    background-color: rgba(255, 255, 255, 0.589);
+
+}
+.hero-left p{
+    font-size: 1.5rem;
+    color: rgb(155, 155, 155);
+}
+.btn-top{
+    padding: 20px 0 20px 0;
+}
+.btn-bottom{
+    width: 440px;
+    display: flex;
+    justify-content: space-between;
+}
+#journal-btn{
+    background-color: #a8dadc ;
+    width: 440px;
+    font-size: 20px;
+    font-weight: 900;
+    color: #1b6769;
+    height: 60px;
+}
+#cat-btn{
+    background-color: #f38375 ;
+    width: 210px;
+    font-size: 20px;
+    color: #682e26;
+    font-weight: 900;
+    height: 60px;
+}
+#pup-btn{
+    background-color: #fdd85d ;
+    width: 210px;
+    font-size: 20px;
+    color: #be5c00;
+    font-weight: 900;
+    height: 60px;
+}
+.hero-right video{
+    border-radius: 50%;
+    margin-top: 7rem;
+}
+.button-footer{
+    height: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.bounce-button {
+    /* Style your button here (font size, background color, etc.) */
+    font-size: 2.5rem;
+    height: 80px;
+    width: 80px;
+    background-color: #8c3cb8;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;  /* Needed for animation */
+  }
+  
+  .bounce-button:hover {
+    /* Add hover effect if desired */
+    background-color: #47026c;
+  }
+  
+  @keyframes bounce {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+  }
+  
+  .bounce-button {
+    animation: bounce 1s infinite alternate;
+    animation-delay: 0.5s;  /* Optional delay for the bounce */
+  }
+  
+#about-us-page{
+    height: 100vh;
+    padding: 50px 0 ;
+
+
+}
+.card{
+    padding: 20px 40px;
+    
+}
+.card .row{
+    display: flex;
+    justify-content: space-between;
+}
+.card img{
+    height: 150px;
+  
+
+}
+.bp-web-widget-container{
+    height: 90%;
+    z-index: 100;
+}

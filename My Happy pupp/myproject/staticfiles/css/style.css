@@ -1,0 +1,425 @@
+body {
+    font-family: sans-serif;
+    background: linear-gradient(to right, #f0f8ff, #e6f2fa); /* Subtle background gradient */
+    font-size: 14px; /* Smaller font size for body */
+}
+
+h1, h2 {
+    margin: 0.5rem 0; /* Reduce margin for headings */
+    font-size: 1.5rem; /* Smaller font size for headings */
+    text-align: center;
+}
+
+.container {
+    max-width: 500px; /* Limit container width for responsiveness */
+    margin: 2rem auto; /* Center container on screen */
+    padding: 1.5rem; /* Reduce padding for content */
+    border-radius: 5px; /* Rounded corners for container */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+#mood-selector {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap onto new lines */
+    justify-content: center; /* Center items horizontally */
+    margin-bottom: 1rem;
+    box-shadow:#333;
+}
+
+.mood-option {
+    margin: 0.5rem;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 2rem;
+    display: inline-block; /* Display as inline-block to arrange in rows */
+    width: 40px; /* Fixed width for each mood option */
+    height: 40px; /* Fixed height for each mood option */
+    text-align: center; /* Center text horizontally */
+    line-height: 40px; /* Center text vertically */
+    transition: background-color 0.3s; /* Add transition for smooth color change */
+}
+
+.mood-option:hover:not(.selected) {
+    background-color: #f0f0f0; /* Change background color on hover */
+}
+
+
+.happy {
+    background-color: #facc1d; /* Yellow for happy */
+}
+.happy p{
+    font-size: 15px;
+
+}
+.excited {
+    background-color: #ff9933; /* Orange for excited */
+}
+.excited p{
+    font-size: 15px;
+
+}
+.calm {
+    background-color: #90caf9; /* Light blue for calm */
+}
+.calm p{
+    font-size: 15px;
+
+}
+
+.neutral {
+    background-color: #cccccc; /* Gray for neutral */
+}
+.neutral p{
+    font-size: 15px;
+
+}
+
+.sad {
+    background-color: #3897f0; /* Blue for sad */
+}
+.sad p{
+    font-size: 15px;
+
+}
+
+.angry {
+    background-color: #f44336; /* Red for angry */
+}
+.angry p{
+    font-size: 15px;
+
+}
+
+.anxious {
+    background-color: #ffc107; /* Yellow for anxious */
+}
+
+.mood-option:hover {
+    opacity: 0.8; /* Slight opacity change on hover */
+}
+
+#notes {
+    width: 100%;
+    min-height: 100px;
+    max-width: 485px;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    font-family: inherit; /* Inherit font family from body */
+}
+
+#save-button {
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    font-weight: bold; /* Add some boldness to button text */
+}
+
+#save-button:hover {
+    background-color: #444;
+}
+
+#mood-history {
+    margin-top: 2rem;
+}
+
+#mood-list {
+    list-style: none;
+    padding: 0;
+}
+
+#mood-list li {
+    margin-bottom: 0.5rem;
+    display: flex; /* Make list items horizontal for layout */
+    align-items: center; /* Align content vertically */
+}
+
+#mood-list li .mood-icon { /* Style for mood icon in list */
+    font-size: 1.5rem; /* Adjust font size for list display */
+    margin-right: 0.5rem;
+}
+
+#mood-list li span { /* Style for note text in list */
+    flex: 1; /* Allow note text to grow and fill remaining space */
+}
+
+
+/* For weather selector */
+
+#weather-selector {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap onto new lines */
+    justify-content: center; /* Center items horizontally */
+    margin-bottom: 1rem;
+}
+
+.weather-option {
+    margin: 0.5rem;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 2rem;
+    display: inline-block; /* Display as inline-block to arrange in rows */
+    width: 40px; /* Fixed width for each weather option */
+    height: 40px; /* Fixed height for each weather option */
+    text-align: center; /* Center text horizontally */
+    line-height: 40px; /* Center text vertically */
+    transition: background-color 0.3s; /* Add transition for smooth color change */
+}
+.weather-option:hover:not(.selected) {
+    background-color: #f0f0f0; /* Change background color on hover */
+}
+
+/* Define styles for different weather options */
+.sunny { background-color: #ffe34c; }
+.sunny p{
+    font-size: 15px;
+
+}
+.cloudy { background-color: #c0c0c0; }
+.cloudy p{
+    font-size: 15px;
+
+}
+.rainy { background-color: #4682b4; }
+.rainy p{
+    font-size: 15px;
+
+}
+.snowy { background-color: #22cbd7; }
+.snowy p{
+    font-size: 15px;
+
+}
+.stormy { background-color: #808080; }
+.stormy p{
+    font-size: 15px;
+
+}
+
+/* Add hover effect */
+.weather-option:hover {
+    opacity: 0.8; /* Slight opacity change on hover */
+}
+
+
+/* People Selector */
+
+#people-selector {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap onto new lines */
+    justify-content: center; /* Center items horizontally */
+    margin-bottom: 1rem;
+}
+
+.people-option {
+    margin: 0.5rem;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 2rem;
+    display: inline-block; /* Display as inline-block to arrange in rows */
+    width: 40px; /* Fixed width for each people option */
+    height: 40px; /* Fixed height for each people option */
+    text-align: center; /* Center text horizontally */
+    line-height: 40px; /* Center text vertically */
+    transition: background-color 0.3s; /* Add transition for smooth color change */
+}
+.people-option:hover:not(.selected) {
+    background-color: #f0f0f0; /* Change background color on hover */
+}
+
+/* Define styles for different people options */
+.friends { background-color: #87CEEB; }
+.friends p{
+    font-size: 15px;
+
+}
+.family { background-color: #90EE90; }
+.family p{
+    font-size: 15px;
+
+}
+.partner { background-color: #FFC0CB; }
+.partner p{
+    font-size: 15px;
+
+}
+.others { background-color: #D3D3D3; }
+.others p{
+    font-size: 15px;
+
+}
+.none { background-color: #FFA07A; }
+.none p{
+    font-size: 15px;
+
+}
+
+/* Add hover effect */
+.people-option:hover {
+    opacity: 0.8; /* Slight opacity change on hover */
+}
+
+
+/* Emotion Selector */
+
+#emotions-selector {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap onto new lines */
+    justify-content: center; /* Center items horizontally */
+    margin-bottom: 1rem;
+    padding-left: 20px;
+}
+
+.emotion-option {
+    margin: 0.5rem;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 2rem;
+    display: inline-block; /* Display as inline-block to arrange in rows */
+    width: 40px; /* Fixed width for each emotion option */
+    height: 40px; /* Fixed height for each emotion option */
+    text-align: center; /* Center text horizontally */
+    line-height: 40px; /* Center text vertically */
+    transition: background-color 0.3s; /* Add transition for smooth color change */
+}
+
+.emotion-option:hover:not(.selected) {
+    background-color: #f0f0f0; /* Change background color on hover */
+}
+
+/* Define styles for different emotion options */
+.joy { background-color: #ffd700; }
+.joy p{
+    font-size: 15px;
+
+}
+.love { background-color: #ff69b4; }
+.love p{
+    font-size: 15px;
+
+}
+.laughter { background-color: #00bfff; }
+.laughter p{
+    font-size: 15px;
+
+}
+.surprise { background-color: #ffa500; }
+.surprise p{
+    font-size: 15px;
+
+}
+.sadness { background-color: #0000ff; }
+.sadness p{
+    font-size: 15px;
+
+}
+.anger { background-color: #ff0000; }
+.anger p{
+    font-size: 15px;
+
+}
+.fear { background-color: #808080; }
+.fear p{
+    font-size: 15px;
+
+}
+.disgust { background-color: #00ff00; }
+.disgust p{
+    font-size: 15px;
+
+}
+.relief { background-color: #ffff00; }
+.relief p{
+    font-size: 15px;
+
+}
+.contentment { background-color: #ff4500; }
+.contentment p{
+    font-size: 15px;
+}
+
+.gratitude { background-color: #32cd32; }
+.gratitude p{
+    font-size: 15px;
+
+}
+.admiration { background-color: #9370db; }
+.admiration p{
+    font-size: 15px;
+
+}
+.pride { background-color: #ff8c00; }
+.pride p{
+    font-size: 15px;
+
+}
+.guilt { background-color: #800080; }
+.guilt p{
+    font-size: 15px;
+
+}
+.shame { background-color: #8b4513; }
+.shame p{
+    font-size: 15px;
+
+}
+
+/* Add hover effect */
+.emotion-option:hover {
+    opacity: 0.8; /* Slight opacity change on hover */
+}
+
+
+/* For Image Upload  */
+
+#image-upload {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+#uploaded-image-container {
+    margin-top: 1rem;
+}
+
+#uploaded-image {
+    max-width: 100%;
+    height: auto;
+}
+
+#camera-button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid #007bff;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#camera-button:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+#delete-button {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#delete-button:hover {
+    background-color: #bb2d3b;
+}
